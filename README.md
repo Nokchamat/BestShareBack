@@ -9,3 +9,5 @@
 - 도커
 - PostgreSQL
 
+## ERD
+![image](https://github.com/Nokchamat/NoteForIOS/assets/107979129/7d7fbf6d-f973-4b35-947e-b5f4ad6fdc3d)
