@@ -25,9 +25,9 @@ public class JwtTokenProvider {
 
   public String createAccessToken(String email) {
     Date now = new Date();
-    return PREFIX + JWT.create() // JWT 토큰을 생성하는 빌더 반환
+    return PREFIX + JWT.create()
         .withIssuer("note")
-        .withSubject(ACCESS_TOKEN_SUBJECT) // JWT의 Subject 지정 -> AccessToken이므로 AccessToken
+        .withSubject(ACCESS_TOKEN_SUBJECT)
         .withAudience("user")
         .withExpiresAt(new Date(now.getTime() + accessTokenExpireTime))
         .withIssuedAt(new Date(now.getTime()))
