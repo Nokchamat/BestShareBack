@@ -1,3 +1,13 @@
+spring:
+  jwt:
+    secret-key: ${JWT_SECRET_KEY}
+    access:
+      expiration: 3600000 # 1시간(60분) (1000 * 60 * 60L)
+      header: Authorization
+
+
+
+
 cloud:
   aws:
     s3:
