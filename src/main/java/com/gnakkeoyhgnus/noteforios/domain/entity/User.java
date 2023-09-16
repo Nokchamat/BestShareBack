@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 public class User extends BaseTimeEntity {
 
   @Id
@@ -29,7 +31,9 @@ public class User extends BaseTimeEntity {
 
   private String name;
 
-  private String nickName;
+  private String nickname;
+
+  private String phoneNumber;
 
   private String profileImageUrl;
 
@@ -37,9 +41,7 @@ public class User extends BaseTimeEntity {
 
   private String emailVerifiedCode;
 
-  private String phoneNumber;
-
   @Enumerated(EnumType.STRING)
-  private RoleType roles;
+  private RoleType role;
 
 }

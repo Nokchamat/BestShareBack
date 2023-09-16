@@ -9,14 +9,16 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class JwtTokenProvider {
 
   @Value("${spring.jwt.secret-key}")
   private String secretKey;
 
-  @Value("${spring.jwt.access.expiration}")
+  @Value("${spring.jwt.expiration}")
   private Long accessTokenExpireTime;
 
   private static final String ACCESS_TOKEN_SUBJECT = "AccessToken";
@@ -25,6 +27,7 @@ public class JwtTokenProvider {
 
   public String createAccessToken(String email) {
     Date now = new Date();
+
     return PREFIX + JWT.create()
         .withIssuer("note")
         .withSubject(ACCESS_TOKEN_SUBJECT)
@@ -36,19 +39,24 @@ public class JwtTokenProvider {
   }
 
   public boolean isTokenValid(String token) {
+
+    log.info("[Token Valid] Token 검증 시작 : " + token);
+
     try {
       token = token.substring(PREFIX.length());
       JWT.require(Algorithm.HMAC256(secretKey)).build().verify(token);
 
+      log.info("[Token Valid] Token 검증 완료 : " + token);
       return true;
     } catch (SignatureVerificationException e) {
-      log.error("Signature verification failed: {}", e.getMessage());
+      log.error("[Signature verification failed] : " + e.getMessage());
     } catch (TokenExpiredException e) {
-      log.error("Token expired: {}", e.getMessage());
+      log.error("[Token expired] : " + e.getMessage());
     } catch (Exception e) {
-      log.error("Invalid token: {}", e.getMessage());
+      log.error("[Invalid token] : "+ e.getMessage());
     }
 
+    log.info("[Token Valid] Token 검증 실패 : " + token);
     return false;
   }
 
