@@ -1,7 +1,9 @@
 package com.gnakkeoyhgnus.noteforios.service;
 
+import com.gnakkeoyhgnus.noteforios.config.jwt.JwtTokenProvider;
 import com.gnakkeoyhgnus.noteforios.domain.constants.RoleType;
 import com.gnakkeoyhgnus.noteforios.domain.entity.User;
+import com.gnakkeoyhgnus.noteforios.domain.form.SignInForm;
 import com.gnakkeoyhgnus.noteforios.domain.form.SignUpForm;
 import com.gnakkeoyhgnus.noteforios.domain.repository.UserRepository;
 import com.gnakkeoyhgnus.noteforios.exception.CustomException;
@@ -22,6 +24,7 @@ public class UserService {
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
   private final AmazonS3Service amazonS3Service;
+  private final JwtTokenProvider jwtTokenProvider;
 
   @Value("${profile.image.default}")
   private String defaultProfileImage;
@@ -52,6 +55,20 @@ public class UserService {
         .emailVerified(false)
         .emailVerifiedCode(RandomString.make(5))
         .build());
+  }
+
+  public String signIn(SignInForm signInForm) {
+    log.info("[signIn] 로그인 시작 Email : " + signInForm.getEmail());
+
+    User user = userRepository.findByEmail(signInForm.getEmail())
+        .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+
+    if (!passwordEncoder.matches(signInForm.getPassword(), user.getPassword())) {
+      throw new CustomException(ErrorCode.MISMATCH_EMAIL_OR_PASSWORD);
+    }
+
+    log.info("[signIn] 로그인 완료 Email : " + signInForm.getEmail());
+    return jwtTokenProvider.createAccessToken(signInForm.getEmail());
   }
 
 }
