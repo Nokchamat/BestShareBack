@@ -1,6 +1,5 @@
 package com.gnakkeoyhgnus.noteforios.exception;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,11 +7,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-public class CustomException extends RuntimeException{
+public class CustomException extends RuntimeException {
+
   private final ErrorCode errorCode;
   private final int status;
 
-  public CustomException(ErrorCode errorCode){
+  public CustomException(ErrorCode errorCode) {
     super(errorCode.getDetail());
     this.errorCode = errorCode;
     this.status = errorCode.getHttpStatus().value();
@@ -22,7 +22,8 @@ public class CustomException extends RuntimeException{
   @NoArgsConstructor
   @Builder
   @Getter
-  public static class CustomExceptionResponse{
+  public static class CustomExceptionResponse {
+
     private int status;
     private String code;
     private String message;
@@ -33,7 +34,8 @@ public class CustomException extends RuntimeException{
   @NoArgsConstructor
   @Builder
   @Getter
-  public static class CustomExceptionValidResponse{
+  public static class CustomExceptionValidResponse {
+
     private int status;
     private String code;
     private List<String> messages;
