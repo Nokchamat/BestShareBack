@@ -20,9 +20,9 @@ public class UserController {
 
   @PostMapping("/sign-up")
   public ResponseEntity<String> signUp(@RequestPart @Valid SignUpForm signUpForm,
-      @RequestPart MultipartFile image) {
+      @RequestPart MultipartFile profileImage) {
 
-    userService.signUp(signUpForm, image);
+    userService.signUp(signUpForm, profileImage);
     return ResponseEntity.ok("회원가입이 완료되었습니다.");
   }
 

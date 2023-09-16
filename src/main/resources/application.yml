@@ -4,10 +4,7 @@ server:
 spring:
   jwt:
     secret-key: ${JWT_SECRET_KEY}
-    access:
     expiration: 3600000 # 1시간(60분) (1000 * 60 * 60L)
-    header: Authorization
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
@@ -16,12 +13,14 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         show_sql: true
         format_sql: true
-
+profile:
+  image:
+    default: ${DEFAULT_IMAGE_URL}
 
 cloud:
   aws:

@@ -20,7 +20,7 @@ public class PageSharedBoard extends BaseTimeEntity {
 
   private String title;
 
-  private String explain;
+  private String explains;
 
   private String thumbnailUrl;
 

@@ -1,11 +1,13 @@
 package com.gnakkeoyhgnus.noteforios.service;
 
 import com.amazonaws.services.kms.model.AlreadyExistsException;
+import com.gnakkeoyhgnus.noteforios.domain.constants.RoleType;
 import com.gnakkeoyhgnus.noteforios.domain.entity.User;
 import com.gnakkeoyhgnus.noteforios.domain.form.SignUpForm;
 import com.gnakkeoyhgnus.noteforios.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.utility.RandomString;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +20,10 @@ public class UserService {
   private final PasswordEncoder passwordEncoder;
   private final AmazonS3Service amazonS3Service;
 
-  public void signUp(SignUpForm signUpForm, MultipartFile image) {
+  @Value("${profile.image.default}")
+  private String defaultProfileImage;
+
+  public void signUp(SignUpForm signUpForm, MultipartFile profileImage) {
 
     userRepository.findByEmail(signUpForm.getEmail())
         .ifPresent(user -> {
@@ -36,9 +41,10 @@ public class UserService {
         .name(signUpForm.getName())
         .nickname(signUpForm.getNickname())
         .phoneNumber(signUpForm.getPhoneNumber())
-        .profileImageUrl(
-            amazonS3Service.uploadImage(image, signUpForm.getEmail())
+        .profileImageUrl(profileImage.isEmpty() ?
+            defaultProfileImage : amazonS3Service.uploadImage(profileImage, signUpForm.getEmail())
         )
+        .role(RoleType.USER)
         .emailVerified(false)
         .emailVerifiedCode(RandomString.make(5))
         .build());

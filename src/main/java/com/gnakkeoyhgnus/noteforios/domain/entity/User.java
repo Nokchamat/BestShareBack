@@ -42,6 +42,6 @@ public class User extends BaseTimeEntity {
   private String emailVerifiedCode;
 
   @Enumerated(EnumType.STRING)
-  private RoleType roles;
+  private RoleType role;
 
 }
