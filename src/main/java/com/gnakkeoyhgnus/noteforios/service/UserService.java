@@ -1,6 +1,6 @@
 package com.gnakkeoyhgnus.noteforios.service;
 
-import com.gnakkeoyhgnus.noteforios.config.jwt.JwtTokenProvider;
+import com.gnakkeoyhgnus.noteforios.jwt.JwtTokenProvider;
 import com.gnakkeoyhgnus.noteforios.domain.constants.RoleType;
 import com.gnakkeoyhgnus.noteforios.domain.entity.User;
 import com.gnakkeoyhgnus.noteforios.domain.form.SignInForm;

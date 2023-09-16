@@ -14,7 +14,10 @@ public enum ErrorCode {
 
   //로그인
   MISMATCH_EMAIL_OR_PASSWORD(HttpStatus.BAD_REQUEST, "이메일이나 비밀번호가 일치하지 않습니다."),
-  NOT_FOUND_USER(HttpStatus.BAD_REQUEST, "유저를 찾을 수 없습니다.")
+  NOT_FOUND_USER(HttpStatus.BAD_REQUEST, "유저를 찾을 수 없습니다."),
+
+  //토큰
+  INVALID_TOKEN(HttpStatus.BAD_REQUEST, "잘못된 토큰입니다.")
 
   ;
 
