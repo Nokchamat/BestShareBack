@@ -35,13 +35,15 @@ public class ExceptionHandler {
   @org.springframework.web.bind.annotation.ExceptionHandler(CustomException.class)
   public ResponseEntity<CustomExceptionResponse> exceptionHandler(
       CustomException exception) {
-    log.error("'{}':'{}'", exception.getErrorCode(), exception.getErrorCode().getDetail());
+    log.error(exception.getErrorCode() + " : " + exception.getErrorCode().getDetail());
+
     return ResponseEntity
         .status(exception.getStatus())
         .body(CustomExceptionResponse.builder()
+            .status(exception.getStatus())
+            .code(exception.getErrorCode().toString())
             .message(exception.getMessage())
-            .code(exception.getErrorCode().getDetail())
-            .status(exception.getStatus()).build());
+            .build());
   }
 
 }
