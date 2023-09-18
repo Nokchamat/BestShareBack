@@ -24,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.multipart.MultipartFile;
 
 @SpringBootTest
+@DisplayName("유저 서비스 테스트")
 class UserServiceTest {
 
   @Autowired

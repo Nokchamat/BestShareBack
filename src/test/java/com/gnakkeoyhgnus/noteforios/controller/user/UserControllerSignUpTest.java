@@ -1,4 +1,4 @@
-package com.gnakkeoyhgnus.noteforios.controller;
+package com.gnakkeoyhgnus.noteforios.controller.user;
 
 import static com.gnakkeoyhgnus.noteforios.exception.ErrorCode.ALREADY_EXISTS_EMAIL;
 import static com.gnakkeoyhgnus.noteforios.exception.ErrorCode.ALREADY_EXISTS_NICKNAME;
@@ -37,9 +37,10 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+@DisplayName("유저 컨트롤러 - 회원가입 테스트")
 @AutoConfigureMockMvc
 @SpringBootTest
-class UserControllerTest {
+class UserControllerSignUpTest {
 
   @MockBean
   private AmazonS3Service amazonS3Service;
