@@ -21,6 +21,15 @@ public enum ErrorCode {
 
   ;
 
+  // 회원가입 Valid
+  public static final String CHECK_THE_EMAIL = "이메일을 확인해주세요.";
+  public static final String PASSWORD_TOO_SHORT_MIN5 = "비밀번호는 최소 5자리 입니다.";
+  public static final String WRITE_THE_NAME = "이름을 적어주세요.";
+  public static final String CHECK_THE_NICKNAME_MIN1_MAX10 = "닉네임은 최소 1자리, 최대 10자리 입니다.";
+  public static final String CHECK_THE_PHONE_NUMBER = "전화번호를 확인해주세요.";
+  public static final String ONLY_NUMBER = "숫자만 적어주세요.";
+
+
   private final HttpStatus httpStatus;
   private final String detail;
 }

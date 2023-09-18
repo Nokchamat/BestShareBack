@@ -139,9 +139,7 @@ class UserServiceTest {
         .build());
 
     //when
-    CustomException exception = assertThrows(CustomException.class, () -> {
-      userService.signIn(sign);
-    });
+    CustomException exception = assertThrows(CustomException.class, () -> userService.signIn(sign));
 
     //then
     assertEquals(ErrorCode.MISMATCH_EMAIL_OR_PASSWORD, exception.getErrorCode());

@@ -1,34 +1,41 @@
 package com.gnakkeoyhgnus.noteforios.domain.form;
 
+import static com.gnakkeoyhgnus.noteforios.exception.ErrorCode.CHECK_THE_EMAIL;
+import static com.gnakkeoyhgnus.noteforios.exception.ErrorCode.CHECK_THE_NICKNAME_MIN1_MAX10;
+import static com.gnakkeoyhgnus.noteforios.exception.ErrorCode.CHECK_THE_PHONE_NUMBER;
+import static com.gnakkeoyhgnus.noteforios.exception.ErrorCode.ONLY_NUMBER;
+import static com.gnakkeoyhgnus.noteforios.exception.ErrorCode.PASSWORD_TOO_SHORT_MIN5;
+import static com.gnakkeoyhgnus.noteforios.exception.ErrorCode.WRITE_THE_NAME;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class SignUpForm {
 
-  @NotEmpty
-  @Email(message = "이메일을 확인해주세요.")
+  @Email(message = CHECK_THE_EMAIL)
   private String email;
 
-  @NotEmpty
-  @Size(min = 5, message = "비밀번호는 최소 5자리 입니다.")
+  @Size(min = 5, message = PASSWORD_TOO_SHORT_MIN5)
   private String password;
 
-  @NotEmpty(message = "이름을 적어주세요.")
+  @NotEmpty(message = WRITE_THE_NAME)
   private String name;
 
-  @NotEmpty
-  @Size(min = 1, max = 10, message = "닉네임은 최소 1자리, 최대 10자리 입니다.")
+  @Size(min = 1, max = 10, message = CHECK_THE_NICKNAME_MIN1_MAX10)
   private String nickname;
 
-  @NotEmpty(message = "전화번호를 적어주세요.")
-  @Size(max = 11, message = "전화번호를 확인해주세요.")
-  @Pattern(regexp = "^[0-9]+$", message = "숫자만 적어주세요.")
+  @Size(min = 11, max = 11, message = CHECK_THE_PHONE_NUMBER)
+  @Pattern(regexp = "^[0-9]+$", message = ONLY_NUMBER)
   private String phoneNumber;
 
 }
