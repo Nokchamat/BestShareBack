@@ -1,0 +1,28 @@
+server:
+  port:8080
+
+spring:
+  jwt:
+    secret-key: jwtsecretkey
+    expiration: 3600000 # 1시간(60분) (1000 * 60 * 60L)
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+    url: jdbc:mysql://localhost:3305/note
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+profile:
+  image:
+    default: testDefaultImageUrl
+
+cloud:
+  aws:
+    s3:
+      bucket: testbucket
+    stack.auto: false
+    region:
+      static: ap-northeast-2
+    credentials:
+      accessKey: testaccesskey
+      secretKey: testsecretkey
