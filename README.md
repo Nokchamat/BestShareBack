@@ -3,11 +3,30 @@
 자신만의 아이디어로 꾸미기 가능
 
 ## 기술 스택
-- Java
-- Spring Boot
-- JPA
-- 도커
-- Mysql
+Backend : Java, Spring Boot, JPA, Docker, Mysql \
+DevOps : AWS EC2, AWS RDS, AWS S3, Docker, Jenkins
 
 ## ERD
-![image](https://github.com/Nokchamat/NoteForIOS/assets/107979129/7d7fbf6d-f973-4b35-947e-b5f4ad6fdc3d)
+![image](https://github.com/Nokchamat/NoteForIOS/assets/107979129/0c08fb83-8311-4d55-b353-27b0fd80e61d)
+
+## 프로젝트 주요 기능
+### 회원가입 / 로그인
+    회원가입
+    - 중복된 이메일로 회원가입 불가
+    - 게시물 작성하기 위해서는 이메일 인증 필요. Mailgun api 사용 예정
+    - data input 값은 validation을 사용하여 체크
+    
+    로그인
+    - 이메일과 비밀번호를 통해 로그인
+    - 로그인 시 Jwt Token 발행
+    - 게시물을 작성하거나 다운은 Token 필요하나 보는 것은 불필요
+### 게시물
+    작성
+    - 게시물 작성 시에 PDF로 노트의 속지 업로드 가능
+
+    조회
+    - 조회는 회원가입 없이 조회 가능하나, 다운 시에는 회원가입 및 이메일 인증 필요
+
+### 계획
+- 회원가입, 로그인, 게시물 구현 후 swift로 간단하게 개발하여 ios 어플로 등록할 수 있도록 할 예정
+- 이후 채팅 등 업데이트 시도 예정
