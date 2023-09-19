@@ -73,7 +73,7 @@ class UserControllerSignUpTest {
         .phoneNumber("01012341234")
         .build();
 
-    when(amazonS3Service.uploadImage(any(), any()))
+    when(amazonS3Service.uploadForProfile(any(), any()))
         .thenReturn("uploadedImage");
 
     String signUpFormJson = objectMapper.writeValueAsString(signUpForm);
@@ -118,7 +118,7 @@ class UserControllerSignUpTest {
         .phoneNumber("01012341234")
         .build();
 
-    when(amazonS3Service.uploadImage(any(), any()))
+    when(amazonS3Service.uploadForProfile(any(), any()))
         .thenReturn("uploadedImage");
 
     String signUpFormJson = objectMapper.writeValueAsString(signUpForm);
