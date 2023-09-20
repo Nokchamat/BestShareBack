@@ -1,8 +1,6 @@
 package com.gnakkeoyhgnus.noteforios.domain.dto;
 
 import com.gnakkeoyhgnus.noteforios.domain.entity.Likes;
-import com.gnakkeoyhgnus.noteforios.domain.entity.PageShareBoard;
-import com.gnakkeoyhgnus.noteforios.domain.entity.User;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
