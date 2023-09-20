@@ -22,7 +22,11 @@ public enum ErrorCode {
   // 게시판
   NOT_FOUND_PAGE_SHARE_BOARD(HttpStatus.BAD_REQUEST, "페이지 공유 게시판을 찾을 수 없습니다."),
   PERMISSION_DENIED_TO_DELETE(HttpStatus.FORBIDDEN, "삭제 권한이 없습니다."),
-  PERMISSION_DENIED_TO_UPDATE(HttpStatus.FORBIDDEN, "수정 권한이 없습니다.")
+  PERMISSION_DENIED_TO_UPDATE(HttpStatus.FORBIDDEN, "수정 권한이 없습니다."),
+
+  //좋아요
+  ALREADY_ADD_LIKES(HttpStatus.BAD_REQUEST, "이미 좋아요 한 게시물 입니다."),
+  NOT_FOUND_LIKES(HttpStatus.BAD_REQUEST, "좋아요를 찾을 수 없습니다.")
 
   ;
 

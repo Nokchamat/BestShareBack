@@ -12,6 +12,8 @@ spring:
     url: jdbc:mysql://localhost:3305/test
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
 
 profile:
   image:

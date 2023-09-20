@@ -6,13 +6,13 @@ import com.gnakkeoyhgnus.noteforios.domain.entity.PageShareBoard;
 import com.gnakkeoyhgnus.noteforios.domain.entity.User;
 import com.gnakkeoyhgnus.noteforios.domain.form.CreatePageShareBoardForm;
 import com.gnakkeoyhgnus.noteforios.domain.form.UpdatePageShareBoardForm;
+import com.gnakkeoyhgnus.noteforios.domain.repository.LikesRepository;
 import com.gnakkeoyhgnus.noteforios.domain.repository.PageShareBoardRepository;
 import com.gnakkeoyhgnus.noteforios.domain.repository.UserRepository;
 import com.gnakkeoyhgnus.noteforios.exception.CustomException;
 import com.gnakkeoyhgnus.noteforios.exception.ErrorCode;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,12 +21,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class PageShareBoardService {
 
   private final PageShareBoardRepository pageShareBoardRepository;
 
   private final UserRepository userRepository;
+
+  private final LikesRepository likesRepository;
 
   private final AmazonS3Service amazonS3Service;
 
@@ -51,11 +52,18 @@ public class PageShareBoardService {
 
   public Page<PageSharedBoardListDto> getAll(Pageable pageable) {
     return pageShareBoardRepository.findAll(pageable)
-        .map(PageSharedBoardListDto::fromEntity);
+        .map(pageShareBoard -> PageSharedBoardListDto.builder()
+            .id(pageShareBoard.getId())
+            .title(pageShareBoard.getTitle())
+            .thumbnailUrl(pageShareBoard.getThumbnailUrl())
+            .viewCount(pageShareBoard.getViewCount())
+            .likesCount(
+                likesRepository.countByPageShareBoardId(pageShareBoard.getId()))
+            .build());
   }
 
   @Transactional
-  public PageSharedBoardDto getPageShareBoardForPageShareBoardId(Long pageShardBoardId) {
+  public PageSharedBoardDto getPageShareBoardDetailForPageShareBoardId(Long pageShardBoardId) {
 
     PageShareBoard pageShareBoard = pageShareBoardRepository.findById(pageShardBoardId)
         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PAGE_SHARE_BOARD));
@@ -66,6 +74,8 @@ public class PageShareBoardService {
 
     userRepository.findById(pageShareBoard.getUser().getId())
         .ifPresent(user -> pageSharedBoardDto.setUserNickname(user.getNickname()));
+
+    pageSharedBoardDto.setLikesCount(likesRepository.countByPageShareBoardId(pageShardBoardId));
 
     return pageSharedBoardDto;
   }
