@@ -49,7 +49,7 @@ public class UserService {
         .nickname(signUpForm.getNickname())
         .phoneNumber(signUpForm.getPhoneNumber())
         .profileImageUrl(profileImage.isEmpty() ?
-            defaultProfileImage : amazonS3Service.uploadImage(profileImage, signUpForm.getEmail())
+            defaultProfileImage : amazonS3Service.uploadForProfile(profileImage, signUpForm.getEmail())
         )
         .role(RoleType.USER)
         .emailVerified(false)

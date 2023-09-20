@@ -5,6 +5,7 @@ import com.gnakkeoyhgnus.noteforios.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -33,6 +34,7 @@ public class SecurityConfig {
             sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeRequests(auth -> auth
             .antMatchers("/", "/v1/user/sign**").permitAll()
+            .antMatchers(HttpMethod.GET, "/v1/pageshareboard/**").permitAll()
             .anyRequest().authenticated()
         )
         .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),

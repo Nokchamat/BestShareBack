@@ -13,15 +13,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gnakkeoyhgnus.noteforios.domain.entity.User;
 import com.gnakkeoyhgnus.noteforios.domain.form.SignInForm;
 import com.gnakkeoyhgnus.noteforios.domain.repository.UserRepository;
-import com.gnakkeoyhgnus.noteforios.service.AmazonS3Service;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,9 +29,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 @SpringBootTest
 @DisplayName("유저 컨트롤러 - 로그인 테스트")
 class UserControllerSignInTest {
-
-  @MockBean
-  private AmazonS3Service amazonS3Service;
 
   @Autowired
   private MockMvc mockMvc;
@@ -49,7 +44,7 @@ class UserControllerSignInTest {
 
   private static final String url = "http://localhost:8080";
 
-  @BeforeEach
+  @AfterEach
   void init() {
     userRepository.deleteAll();
   }
@@ -84,7 +79,6 @@ class UserControllerSignInTest {
   @DisplayName("로그인 실패 - 가입된 유저 없음")
   @Test
   void signIn_Fail_NotFoundUser() throws Exception {
-
     SignInForm signInForm = SignInForm.builder()
         .email("test@test.com")
         .password("12345678")

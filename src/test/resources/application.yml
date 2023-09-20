@@ -9,12 +9,14 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 1234
-    url: jdbc:mysql://localhost:3305/note
+    url: jdbc:mysql://localhost:3305/test
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
+
 profile:
   image:
     default: testDefaultImageUrl
+
 
 cloud:
   aws:
@@ -26,3 +28,4 @@ cloud:
     credentials:
       accessKey: testaccesskey
       secretKey: testsecretkey
+

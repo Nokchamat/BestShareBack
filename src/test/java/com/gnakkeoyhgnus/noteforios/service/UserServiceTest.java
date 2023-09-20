@@ -14,7 +14,7 @@ import com.gnakkeoyhgnus.noteforios.domain.repository.UserRepository;
 import com.gnakkeoyhgnus.noteforios.exception.CustomException;
 import com.gnakkeoyhgnus.noteforios.exception.ErrorCode;
 import com.gnakkeoyhgnus.noteforios.jwt.JwtTokenProvider;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ class UserServiceTest {
   @Autowired
   private UserService userService;
 
-  @BeforeEach
+  @AfterEach
   void init() {
     userRepository.deleteAll();
   }
@@ -58,7 +58,7 @@ class UserServiceTest {
 
     MultipartFile multipartFile = mock(MultipartFile.class);
 
-    when(amazonS3Service.uploadImage(any(MultipartFile.class), any(String.class)))
+    when(amazonS3Service.uploadForProfile(any(MultipartFile.class), any(String.class)))
         .thenReturn("uploadUrl");
 
     //when
