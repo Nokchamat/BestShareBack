@@ -34,6 +34,9 @@ public enum ErrorCode {
   public static final String CHECK_THE_PHONE_NUMBER = "전화번호를 확인해주세요.";
   public static final String ONLY_NUMBER = "숫자만 적어주세요.";
 
+  // 속지 공유 게시판 Valid
+  public static final String WRITE_THE_TITLE = "제목을 적어주세요.";
+  public static final String WRITE_THE_EXPLAIN = "설명을 적어주세요.";
 
   private final HttpStatus httpStatus;
   private final String detail;

@@ -2,9 +2,6 @@ package com.gnakkeoyhgnus.noteforios.domain.dto;
 
 import com.gnakkeoyhgnus.noteforios.domain.entity.PageShareBoard;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

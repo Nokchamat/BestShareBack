@@ -26,7 +26,7 @@ import com.gnakkeoyhgnus.noteforios.exception.ErrorCode;
 import com.gnakkeoyhgnus.noteforios.service.AmazonS3Service;
 import java.nio.charset.StandardCharsets;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,7 @@ class UserControllerSignUpTest {
 
   private static final String url = "http://localhost:8080";
 
-  @BeforeEach
+  @AfterEach
   void init() {
     userRepository.deleteAll();
   }

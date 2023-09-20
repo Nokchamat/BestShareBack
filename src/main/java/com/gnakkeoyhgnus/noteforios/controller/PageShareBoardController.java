@@ -6,7 +6,7 @@ import com.gnakkeoyhgnus.noteforios.domain.entity.User;
 import com.gnakkeoyhgnus.noteforios.domain.form.CreatePageShareBoardForm;
 import com.gnakkeoyhgnus.noteforios.domain.form.UpdatePageShareBoardForm;
 import com.gnakkeoyhgnus.noteforios.service.PageShareBoardService;
-import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +31,7 @@ public class PageShareBoardController {
 
   @PostMapping
   public ResponseEntity<String> createPageShareBoard(
-      @RequestPart CreatePageShareBoardForm createPageShareBoardForm,
+      @RequestPart @Valid CreatePageShareBoardForm createPageShareBoardForm,
       @RequestPart MultipartFile thumbnail,
       @RequestPart MultipartFile pagePDF,
       @AuthenticationPrincipal User user) {

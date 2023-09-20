@@ -104,6 +104,5 @@ public class PageShareBoardService {
     if (!pagePDF.isEmpty()) {
       amazonS3Service.uploadForPDF(pagePDF, pageShareBoardId);
     }
-
   }
 }
