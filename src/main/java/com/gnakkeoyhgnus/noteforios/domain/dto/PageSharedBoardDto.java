@@ -29,6 +29,8 @@ public class PageSharedBoardDto {
 
   private String userNickname;
 
+  private Long likesCount;
+
   public static PageSharedBoardDto fromEntity(PageShareBoard pageShareBoard) {
 
     return PageSharedBoardDto.builder()

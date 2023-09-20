@@ -52,7 +52,7 @@ public class PageShareBoardController {
       @PathVariable Long pageShardBoardId) {
 
     return ResponseEntity.ok(
-        pageShareBoardService.getPageShareBoardForPageShareBoardId(pageShardBoardId));
+        pageShareBoardService.getPageShareBoardDetailForPageShareBoardId(pageShardBoardId));
   }
 
   @DeleteMapping("/{pageShareBoardId}")

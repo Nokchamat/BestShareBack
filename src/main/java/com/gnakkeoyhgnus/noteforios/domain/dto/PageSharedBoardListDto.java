@@ -1,11 +1,12 @@
 package com.gnakkeoyhgnus.noteforios.domain.dto;
 
-import com.gnakkeoyhgnus.noteforios.domain.entity.PageShareBoard;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
+@Builder
 public class PageSharedBoardListDto {
 
   private Long id;
@@ -16,10 +17,6 @@ public class PageSharedBoardListDto {
 
   private Long viewCount;
 
-  public static PageSharedBoardListDto fromEntity(PageShareBoard pageShareBoard) {
-
-    return new PageSharedBoardListDto(pageShareBoard.getId(), pageShareBoard.getTitle(),
-        pageShareBoard.getThumbnailUrl(), pageShareBoard.getViewCount());
-  }
+  private Long likesCount;
 
 }
