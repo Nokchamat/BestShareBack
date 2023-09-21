@@ -17,12 +17,15 @@ public class LikesDto {
 
   private Long pageShareBoardId;
 
+  private String pageShareBoardTitle;
+
   private LocalDateTime createdAt;
 
   public static LikesDto fromEntity(Likes likes) {
     return LikesDto.builder()
         .id(likes.getId())
         .pageShareBoardId(likes.getPageShareBoard().getId())
+        .pageShareBoardTitle(likes.getPageShareBoard().getTitle())
         .createdAt(likes.getCreatedAt())
         .build();
   }
