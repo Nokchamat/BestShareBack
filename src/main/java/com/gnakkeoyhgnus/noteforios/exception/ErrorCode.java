@@ -8,6 +8,10 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ErrorCode {
 
+  // 공용
+  PERMISSION_DENIED_TO_DELETE(HttpStatus.FORBIDDEN, "삭제 권한이 없습니다."),
+  PERMISSION_DENIED_TO_UPDATE(HttpStatus.FORBIDDEN, "수정 권한이 없습니다."),
+
   // 회원가입
   ALREADY_EXISTS_EMAIL(HttpStatus.BAD_REQUEST, "이미 이메일로 가입된 아이디가 존재합니다."),
   ALREADY_EXISTS_NICKNAME(HttpStatus.BAD_REQUEST, "이미 닉네임이 존재합니다."),
@@ -21,18 +25,19 @@ public enum ErrorCode {
 
   // 게시판
   NOT_FOUND_PAGE_SHARE_BOARD(HttpStatus.BAD_REQUEST, "페이지 공유 게시판을 찾을 수 없습니다."),
-  PERMISSION_DENIED_TO_DELETE(HttpStatus.FORBIDDEN, "삭제 권한이 없습니다."),
-  PERMISSION_DENIED_TO_UPDATE(HttpStatus.FORBIDDEN, "수정 권한이 없습니다."),
 
   //좋아요
-  ALREADY_ADD_LIKES(HttpStatus.BAD_REQUEST, "이미 좋아요 한 게시물 입니다."),
-  NOT_FOUND_LIKES(HttpStatus.BAD_REQUEST, "좋아요를 찾을 수 없습니다.")
+  ALREADY_ADD_LIKES(HttpStatus.BAD_REQUEST, "이미 좋아요 한 게시물입니다."),
+  NOT_FOUND_LIKES(HttpStatus.BAD_REQUEST, "좋아요를 찾을 수 없습니다."),
 
+  //팔로우
+  ALREADY_ADD_FOLLOW(HttpStatus.BAD_REQUEST, "이미 팔로우 한 유저입니다."),
+  NOT_FOUND_FOLLOW(HttpStatus.BAD_REQUEST, "팔로우를 찾을 수 없습니다.")
   ;
 
   // 회원가입 Valid
   public static final String CHECK_THE_EMAIL = "이메일을 확인해주세요.";
-  public static final String PASSWORD_TOO_SHORT_MIN5 = "비밀번호는 최소 5자리 입니다.";
+  public static final String PASSWORD_TOO_SHORT_MIN5 = "비밀번호는 최소 5자리입니다.";
   public static final String WRITE_THE_NAME = "이름을 적어주세요.";
   public static final String CHECK_THE_NICKNAME_MIN1_MAX10 = "닉네임은 최소 1자리, 최대 10자리 입니다.";
   public static final String CHECK_THE_PHONE_NUMBER = "전화번호를 확인해주세요.";
