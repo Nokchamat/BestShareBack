@@ -16,5 +16,5 @@ public interface LikesRepository extends JpaRepository<Likes, Long> {
 
   Page<Likes> findByUserId(Long id, Pageable pageable);
 
-  Optional<Likes> findByIdAndUserId(Long id, Long userId);
+  void deleteAllByPageShareBoardId(Long pageShareBoardId);
 }
