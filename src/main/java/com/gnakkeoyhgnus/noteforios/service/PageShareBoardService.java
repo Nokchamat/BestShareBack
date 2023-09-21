@@ -92,6 +92,8 @@ public class PageShareBoardService {
 
     amazonS3Service.deleteAllFileForPageShareBoard(pageShareBoard);
 
+    likesRepository.deleteAllByPageShareBoardId(pageShareBoard.getId());
+
     pageShareBoardRepository.delete(pageShareBoard);
   }
 
