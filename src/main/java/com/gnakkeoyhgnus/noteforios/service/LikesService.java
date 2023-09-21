@@ -8,6 +8,7 @@ import com.gnakkeoyhgnus.noteforios.domain.repository.LikesRepository;
 import com.gnakkeoyhgnus.noteforios.domain.repository.PageShareBoardRepository;
 import com.gnakkeoyhgnus.noteforios.exception.CustomException;
 import com.gnakkeoyhgnus.noteforios.exception.ErrorCode;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -46,8 +47,12 @@ public class LikesService {
 
   @Transactional
   public void deleteLikes(User user, Long likesId) {
-    Likes likes = likesRepository.findByIdAndUserId(likesId, user.getId())
+    Likes likes = likesRepository.findById(likesId)
         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_LIKES));
+
+    if (!Objects.equals(user.getId(), likes.getUser().getId())) {
+      throw new CustomException(ErrorCode.PERMISSION_DENIED_TO_DELETE);
+    }
 
     likesRepository.delete(likes);
   }
