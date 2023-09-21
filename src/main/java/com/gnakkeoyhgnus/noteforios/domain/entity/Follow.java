@@ -25,19 +25,19 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Builder
 @EntityListeners(AuditingEntityListener.class)
-public class Likes {
+public class Follow {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id")
-  private User user;
+  @JoinColumn(name = "following_id")
+  private User following;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "page_share_board_id")
-  private PageShareBoard pageShareBoard;
+  @JoinColumn(name = "follower_id")
+  private User follower;
 
   @CreatedDate
   @Column(nullable = false, updatable = false)
