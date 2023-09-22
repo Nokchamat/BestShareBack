@@ -1,11 +1,14 @@
 package com.gnakkeoyhgnus.noteforios.service;
 
+import static java.lang.String.format;
+
 import com.gnakkeoyhgnus.noteforios.domain.dto.PageSharedBoardDto;
 import com.gnakkeoyhgnus.noteforios.domain.dto.PageSharedBoardListDto;
 import com.gnakkeoyhgnus.noteforios.domain.entity.PageShareBoard;
 import com.gnakkeoyhgnus.noteforios.domain.entity.User;
 import com.gnakkeoyhgnus.noteforios.domain.form.CreatePageShareBoardForm;
 import com.gnakkeoyhgnus.noteforios.domain.form.UpdatePageShareBoardForm;
+import com.gnakkeoyhgnus.noteforios.domain.repository.FollowRepository;
 import com.gnakkeoyhgnus.noteforios.domain.repository.LikesRepository;
 import com.gnakkeoyhgnus.noteforios.domain.repository.PageShareBoardRepository;
 import com.gnakkeoyhgnus.noteforios.domain.repository.UserRepository;
@@ -29,7 +32,11 @@ public class PageShareBoardService {
 
   private final LikesRepository likesRepository;
 
+  private final FollowRepository followRepository;
+
   private final AmazonS3Service amazonS3Service;
+
+  private final NotificationKeywordsService notificationKeywordsService;
 
   @Transactional
   public void createPageShareBoard(User user,
@@ -48,6 +55,10 @@ public class PageShareBoardService {
         amazonS3Service.uploadForPDF(pagePdfFile, pageShareBoard.getId())
     );
 
+    String keywords = format("%s님의 게시물이 올라왔습니다.", user.getNickname());
+    followRepository.findAllByFollowingId(user.getId()).forEach(follow ->
+        notificationKeywordsService.addNotificationKeywords(follow.getFollower(), keywords)
+    );
   }
 
   public Page<PageSharedBoardListDto> getAll(Pageable pageable) {
