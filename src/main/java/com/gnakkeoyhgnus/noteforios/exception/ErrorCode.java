@@ -30,6 +30,9 @@ public enum ErrorCode {
   ALREADY_ADD_LIKES(HttpStatus.BAD_REQUEST, "이미 좋아요 한 게시물입니다."),
   NOT_FOUND_LIKES(HttpStatus.BAD_REQUEST, "좋아요를 찾을 수 없습니다."),
 
+  //알림
+  NOT_FOUND_NOTIFICATIONKEYWORDS(HttpStatus.BAD_REQUEST, "알림을 찾을 수 없습니다."),
+
   //팔로우
   ALREADY_ADD_FOLLOW(HttpStatus.BAD_REQUEST, "이미 팔로우 한 유저입니다."),
   NOT_FOUND_FOLLOW(HttpStatus.BAD_REQUEST, "팔로우를 찾을 수 없습니다.")
