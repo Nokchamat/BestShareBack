@@ -43,7 +43,6 @@ class UserServiceTest {
     userRepository.deleteAll();
   }
 
-
   @DisplayName("회원가입 - 이미지 업로드")
   @Test
   void signUp_ImageUpload() {
