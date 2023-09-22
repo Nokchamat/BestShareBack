@@ -30,7 +30,7 @@ public class NotificationKeywordsService {
             notificationKeywordsId)
         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_NOTIFICATIONKEYWORDS));
 
-    if (Objects.equals(notificationKeywords.getUser().getId(), user.getId())) {
+    if (!Objects.equals(notificationKeywords.getUser().getId(), user.getId())) {
       throw new CustomException(ErrorCode.PERMISSION_DENIED_TO_DELETE);
     }
 
