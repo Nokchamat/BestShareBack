@@ -1,4 +1,4 @@
-package com.gnakkeoyhgnus.noteforios.controller.likes.likes;
+package com.gnakkeoyhgnus.noteforios.controller.follow;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
