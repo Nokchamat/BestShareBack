@@ -21,7 +21,7 @@ public class WebSocketBrokerConfig implements WebSocketMessageBrokerConfigurer {
     // 인자로 들어가는 경로는 처음 웹소켓 handshake 설정
     registry
         .addEndpoint("/ws-stomp")
-        .setAllowedOrigins("*")
+        .setAllowedOriginPatterns("*")
         .withSockJS();
   }
 

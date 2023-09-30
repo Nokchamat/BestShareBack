@@ -34,7 +34,8 @@ public class NotificationKeywordsController {
   public ResponseEntity<Page<NotificationKeywordsDto>> getNotificationKeywords(
       @AuthenticationPrincipal User user, Pageable pageable) {
 
-    return ResponseEntity.ok(notificationKeywordsService.getAllNotificationKeywords(user, pageable));
+    return ResponseEntity.ok(
+        notificationKeywordsService.getAllNotificationKeywords(user, pageable));
   }
 
 }
