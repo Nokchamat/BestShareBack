@@ -7,8 +7,7 @@ Backend : Java, Spring Boot, JPA, Docker, Mysql \
 DevOps : AWS EC2, AWS RDS, AWS S3, Docker, Jenkins
 
 ## ERD
-![image](https://github.com/Nokchamat/NoteForIOS/assets/107979129/96b4c697-873d-4f38-8f07-1653b35e59e4)
-
+![img.png](img.png)
 
 ## 프로젝트 주요 기능
 ### 회원가입 / 로그인
