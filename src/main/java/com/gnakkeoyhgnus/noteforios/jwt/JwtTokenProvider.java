@@ -40,7 +40,7 @@ public class JwtTokenProvider {
 
   private static final String ACCESS_TOKEN_SUBJECT = "AccessToken";
   private static final String EMAIL_CLAIM = "email";
-  private static final String PREFIX = "Bearer ";
+  public static final String PREFIX = "Bearer ";
 
   public String createAccessToken(String email) {
     Date now = new Date();

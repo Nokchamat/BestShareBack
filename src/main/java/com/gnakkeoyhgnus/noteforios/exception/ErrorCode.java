@@ -11,6 +11,7 @@ public enum ErrorCode {
   // 공용
   PERMISSION_DENIED_TO_DELETE(HttpStatus.FORBIDDEN, "삭제 권한이 없습니다."),
   PERMISSION_DENIED_TO_UPDATE(HttpStatus.FORBIDDEN, "수정 권한이 없습니다."),
+  PERMISSION_DENIED(HttpStatus.FORBIDDEN, "권한이 없습니다."),
 
   // 회원가입
   ALREADY_EXISTS_EMAIL(HttpStatus.BAD_REQUEST, "이미 이메일로 가입된 아이디가 존재합니다."),
@@ -35,7 +36,10 @@ public enum ErrorCode {
 
   //팔로우
   ALREADY_ADD_FOLLOW(HttpStatus.BAD_REQUEST, "이미 팔로우 한 유저입니다."),
-  NOT_FOUND_FOLLOW(HttpStatus.BAD_REQUEST, "팔로우를 찾을 수 없습니다.")
+  NOT_FOUND_FOLLOW(HttpStatus.BAD_REQUEST, "팔로우를 찾을 수 없습니다."),
+
+  ALREADY_EXIST_CHATTINGROOM(HttpStatus.BAD_REQUEST, "이미 상대방과의 채팅방이 존재합니다."),
+  NOT_FOUND_CHATTINGROOM(HttpStatus.BAD_REQUEST, "채팅방을 찾을 수 없습니다.")
   ;
 
   // 회원가입 Valid

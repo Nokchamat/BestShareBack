@@ -3,6 +3,7 @@ package com.gnakkeoyhgnus.noteforios.config;
 import com.gnakkeoyhgnus.noteforios.jwt.JwtAuthenticationFilter;
 import com.gnakkeoyhgnus.noteforios.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -34,6 +35,8 @@ public class SecurityConfig {
             sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeRequests(auth -> auth
             .antMatchers("/", "/v1/user/sign**").permitAll()
+            .antMatchers("/ws/**").permitAll()
+            .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
             .antMatchers(HttpMethod.GET, "/v1/pageshareboard/**").permitAll()
             .anyRequest().authenticated()
         )
