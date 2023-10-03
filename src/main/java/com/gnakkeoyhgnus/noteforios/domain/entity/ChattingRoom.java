@@ -31,6 +31,10 @@ public class ChattingRoom {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  private Boolean firstUserExist;
+
+  private Boolean secondUserExist;
+
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "first_user_id")
   private User firstUser;
@@ -43,5 +47,17 @@ public class ChattingRoom {
   @Column(nullable = false, updatable = false)
   @JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
   private LocalDateTime createdAt;
+
+  public void setLeaveFirstUser() {
+    this.firstUserExist = false;
+  }
+
+  public void setLeaveSecondUser() {
+    this.secondUserExist = false;
+  }
+
+  public boolean existUser() {
+    return firstUserExist || secondUserExist;
+  }
 
 }
