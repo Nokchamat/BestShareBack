@@ -48,4 +48,8 @@ public class ChattingMessage {
   @JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
   private LocalDateTime createdAt;
 
+  public void setIsRead() {
+    this.isRead = true;
+  }
+
 }

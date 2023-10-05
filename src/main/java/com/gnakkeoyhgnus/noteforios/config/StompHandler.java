@@ -34,12 +34,13 @@ public class StompHandler implements ChannelInterceptor {
       String token = accessor.getFirstNativeHeader(HttpHeaders.AUTHORIZATION);
       if (token != null && token.startsWith(PREFIX)) {
         log.info("preSend PREFIX 확인");
-        token = token.substring(PREFIX.length());
         if (jwtTokenProvider.isTokenValid(token)) {
-          log.info("preSend TokenValid");
+          log.info("preSend TokenValid 완료");
           Authentication auth = jwtTokenProvider.getAuthentication(token);
           Objects.requireNonNull(accessor.getSessionAttributes())
-              .put("user", auth.getName());
+              .put("user", auth.getPrincipal());
+
+          log.info("preSend Authentication 작업 완료");
         }
       } else {
         log.error("토큰이 없거나 형식이 맞지 않습니다.");
