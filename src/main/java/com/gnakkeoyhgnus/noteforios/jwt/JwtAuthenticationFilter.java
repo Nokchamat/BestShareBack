@@ -22,13 +22,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
       FilterChain filterChain) throws ServletException, IOException {
-
+    log.info("[JwtAuthenticationFilter] 진입");
     Optional<String> token = JwtTokenProvider.resolveToken(request);
-    if (token.isEmpty()) {
+    if (token.isEmpty() || token.get().equals("")) {
       filterChain.doFilter(request, response);
       return;
     }
 
+    log.info("[JwtAuthenticationFilter]  TokenValidate : " + token.get());
     String email = jwtTokenProvider.getEmail(token.get());
     log.info("[JwtAuthenticationFilter] TokenVerify 시작 Email : " + email);
 
