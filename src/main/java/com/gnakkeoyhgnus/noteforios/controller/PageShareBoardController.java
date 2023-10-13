@@ -47,6 +47,12 @@ public class PageShareBoardController {
     return ResponseEntity.ok(pageShareBoardService.getAll(pageable));
   }
 
+  @GetMapping("/user/{userId}")
+  public ResponseEntity<Page<PageSharedBoardListDto>> getAllPageShareBoardByUserId(
+      @PathVariable Long userId,  Pageable pageable) {
+    return ResponseEntity.ok(pageShareBoardService.getAllByUserId(userId, pageable));
+  }
+
   @GetMapping("/{pageShardBoardId}")
   public ResponseEntity<PageSharedBoardDto> getDetailForPageShareBoardId(
       @PathVariable Long pageShardBoardId) {
