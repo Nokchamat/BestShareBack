@@ -6,6 +6,7 @@ import com.gnakkeoyhgnus.noteforios.domain.entity.User;
 import com.gnakkeoyhgnus.noteforios.domain.form.CreatePageShareBoardForm;
 import com.gnakkeoyhgnus.noteforios.domain.form.UpdatePageShareBoardForm;
 import com.gnakkeoyhgnus.noteforios.service.PageShareBoardService;
+import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -47,12 +48,24 @@ public class PageShareBoardController {
     return ResponseEntity.ok(pageShareBoardService.getAll(pageable));
   }
 
+  @GetMapping("/user/{userId}")
+  public ResponseEntity<Page<PageSharedBoardListDto>> getAllPageShareBoardByUserId(
+      @PathVariable Long userId,  Pageable pageable) {
+    return ResponseEntity.ok(pageShareBoardService.getAllByUserId(userId, pageable));
+  }
+
   @GetMapping("/{pageShardBoardId}")
   public ResponseEntity<PageSharedBoardDto> getDetailForPageShareBoardId(
       @PathVariable Long pageShardBoardId) {
 
     return ResponseEntity.ok(
         pageShareBoardService.getPageShareBoardDetailForPageShareBoardId(pageShardBoardId));
+  }
+
+  @GetMapping("/best")
+  public ResponseEntity<List<PageSharedBoardListDto>> getBestPageShareBoardList() {
+
+    return ResponseEntity.ok(pageShareBoardService.getBestPageShareBoardList());
   }
 
   @DeleteMapping("/{pageShareBoardId}")
