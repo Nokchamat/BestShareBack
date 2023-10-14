@@ -132,7 +132,6 @@ public class PageShareBoardService {
   }
 
   public Page<PageSharedBoardListDto> getAllByUserId(Long userId, Pageable pageable) {
-
     userRepository.findById(userId)
         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
 
@@ -159,4 +158,5 @@ public class PageShareBoardService {
       return pageSharedBoardListDto;
     }).collect(Collectors.toList());
   }
+
 }

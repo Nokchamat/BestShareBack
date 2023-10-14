@@ -70,5 +70,4 @@ public class UserService {
     log.info("[signIn] 로그인 완료 Email : " + signInForm.getEmail());
     return jwtTokenProvider.createAccessToken(signInForm.getEmail());
   }
-
 }
