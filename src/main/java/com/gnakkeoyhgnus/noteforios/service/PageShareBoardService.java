@@ -128,4 +128,19 @@ public class PageShareBoardService {
       amazonS3Service.uploadForPDF(pagePDF, pageShareBoardId);
     }
   }
+
+  public Page<PageSharedBoardListDto> getAllByUserId(Long userId, Pageable pageable) {
+
+    userRepository.findById(userId).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+
+    return pageShareBoardRepository.findAllByUserId(userId, pageable)
+        .map(pageShareBoard -> PageSharedBoardListDto.builder()
+            .id(pageShareBoard.getId())
+            .title(pageShareBoard.getTitle())
+            .thumbnailUrl(pageShareBoard.getThumbnailUrl())
+            .viewCount(pageShareBoard.getViewCount())
+            .likesCount(
+                likesRepository.countByPageShareBoardId(pageShareBoard.getId()))
+            .build());
+  }
 }
