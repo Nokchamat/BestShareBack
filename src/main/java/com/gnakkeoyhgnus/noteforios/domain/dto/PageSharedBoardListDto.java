@@ -1,5 +1,6 @@
 package com.gnakkeoyhgnus.noteforios.domain.dto;
 
+import com.gnakkeoyhgnus.noteforios.domain.entity.PageShareBoard;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,5 +19,18 @@ public class PageSharedBoardListDto {
   private Long viewCount;
 
   private Long likesCount;
+
+  public static PageSharedBoardListDto fromEntity(PageShareBoard pageShareBoard) {
+    return PageSharedBoardListDto.builder()
+        .id(pageShareBoard.getId())
+        .title(pageShareBoard.getTitle())
+        .thumbnailUrl(pageShareBoard.getThumbnailUrl())
+        .viewCount(pageShareBoard.getViewCount())
+        .build();
+  }
+
+  public void setLikesCount(Long likesCount) {
+    this.likesCount = likesCount;
+  }
 
 }

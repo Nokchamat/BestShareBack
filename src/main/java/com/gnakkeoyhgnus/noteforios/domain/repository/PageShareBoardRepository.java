@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface PageShareBoardRepository extends JpaRepository<PageShareBoard, Long> {
 
   Page<PageShareBoard> findAllByUserId(Long userId, Pageable pageable);
+
 }

@@ -14,7 +14,9 @@ import com.gnakkeoyhgnus.noteforios.domain.repository.PageShareBoardRepository;
 import com.gnakkeoyhgnus.noteforios.domain.repository.UserRepository;
 import com.gnakkeoyhgnus.noteforios.exception.CustomException;
 import com.gnakkeoyhgnus.noteforios.exception.ErrorCode;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -130,8 +132,8 @@ public class PageShareBoardService {
   }
 
   public Page<PageSharedBoardListDto> getAllByUserId(Long userId, Pageable pageable) {
-
-    userRepository.findById(userId).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+    userRepository.findById(userId)
+        .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
 
     return pageShareBoardRepository.findAllByUserId(userId, pageable)
         .map(pageShareBoard -> PageSharedBoardListDto.builder()
@@ -143,4 +145,18 @@ public class PageShareBoardService {
                 likesRepository.countByPageShareBoardId(pageShareBoard.getId()))
             .build());
   }
+
+  public List<PageSharedBoardListDto> getBestPageShareBoardList() {
+
+    return likesRepository.findAllByCountPageShareBoardId(
+        Pageable.ofSize(3)).stream().map(id -> {
+      PageSharedBoardListDto pageSharedBoardListDto = PageSharedBoardListDto.fromEntity(
+          pageShareBoardRepository.findById(id[0]).get());
+      pageSharedBoardListDto.setLikesCount(
+          likesRepository.countByPageShareBoardId(id[0])
+      );
+      return pageSharedBoardListDto;
+    }).collect(Collectors.toList());
+  }
+
 }
