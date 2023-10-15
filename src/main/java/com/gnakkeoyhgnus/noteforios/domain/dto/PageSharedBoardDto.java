@@ -31,6 +31,10 @@ public class PageSharedBoardDto {
 
   private Long likesCount;
 
+  private Long likesId;
+
+  private Boolean isLikes;
+
   public static PageSharedBoardDto fromEntity(PageShareBoard pageShareBoard) {
 
     return PageSharedBoardDto.builder()
@@ -43,6 +47,7 @@ public class PageSharedBoardDto {
         .viewCount(pageShareBoard.getViewCount())
         .createdAt(pageShareBoard.getCreatedAt())
         .userNickname("탈퇴한 유저")
+        .isLikes(false)
         .build();
   }
 

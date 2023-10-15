@@ -74,7 +74,8 @@ public class PageShareBoardService {
   }
 
   @Transactional
-  public PageSharedBoardDto getPageShareBoardDetailForPageShareBoardId(Long pageShardBoardId) {
+  public PageSharedBoardDto getPageShareBoardDetailForPageShareBoardId(
+      User user, Long pageShardBoardId) {
 
     PageShareBoard pageShareBoard = pageShareBoardRepository.findById(pageShardBoardId)
         .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PAGE_SHARE_BOARD));
@@ -84,9 +85,18 @@ public class PageShareBoardService {
     PageSharedBoardDto pageSharedBoardDto = PageSharedBoardDto.fromEntity(pageShareBoard);
 
     userRepository.findById(pageShareBoard.getUser().getId())
-        .ifPresent(user -> pageSharedBoardDto.setUserNickname(user.getNickname()));
+        .ifPresent(users -> pageSharedBoardDto.setUserNickname(users.getNickname()));
 
     pageSharedBoardDto.setLikesCount(likesRepository.countByPageShareBoardId(pageShardBoardId));
+
+    if (!Objects.isNull(user)) {
+      likesRepository.findByUserIdAndPageShareBoardId(user.getId(), pageShardBoardId)
+          .ifPresent(likes -> {
+            pageSharedBoardDto.setIsLikes(true);
+            pageSharedBoardDto.setLikesId(likes.getId());
+          });
+
+    }
 
     return pageSharedBoardDto;
   }

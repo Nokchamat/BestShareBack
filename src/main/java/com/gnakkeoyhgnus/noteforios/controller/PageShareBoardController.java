@@ -49,10 +49,11 @@ public class PageShareBoardController {
 
   @GetMapping("/{pageShardBoardId}")
   public ResponseEntity<PageSharedBoardDto> getDetailForPageShareBoardId(
+      @AuthenticationPrincipal User user,
       @PathVariable Long pageShardBoardId) {
 
     return ResponseEntity.ok(
-        pageShareBoardService.getPageShareBoardDetailForPageShareBoardId(pageShardBoardId));
+        pageShareBoardService.getPageShareBoardDetailForPageShareBoardId(user, pageShardBoardId));
   }
 
   @DeleteMapping("/{pageShareBoardId}")
