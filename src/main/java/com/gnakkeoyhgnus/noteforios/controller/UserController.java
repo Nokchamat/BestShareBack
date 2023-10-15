@@ -1,5 +1,6 @@
 package com.gnakkeoyhgnus.noteforios.controller;
 
+import com.gnakkeoyhgnus.noteforios.domain.dto.PublicUserDto;
 import com.gnakkeoyhgnus.noteforios.domain.dto.UserDto;
 import com.gnakkeoyhgnus.noteforios.domain.entity.User;
 import com.gnakkeoyhgnus.noteforios.domain.form.SignInForm;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,7 +48,14 @@ public class UserController {
   @GetMapping
   public ResponseEntity<UserDto> getMyProfile(@AuthenticationPrincipal User user) {
 
-    return ResponseEntity.ok(UserDto.fromEntity(user));
+    return ResponseEntity.ok(userService.getMyProfile(user));
+  }
+
+  @GetMapping("/{userId}")
+  public ResponseEntity<PublicUserDto> getProfileByUserId(
+      @AuthenticationPrincipal User user, @PathVariable Long userId) {
+
+    return ResponseEntity.ok(userService.getProfileByUserId(user, userId));
   }
 
 }

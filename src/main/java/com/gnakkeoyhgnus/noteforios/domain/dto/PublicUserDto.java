@@ -5,41 +5,35 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDto {
+public class PublicUserDto {
 
   private Long id;
 
-  private String email;
-
-  private String name;
-
   private String nickname;
-
-  private String phoneNumber;
 
   private String profileImageUrl;
 
   private Long followerCount;
 
-  public static UserDto fromEntity(User user) {
-    return UserDto.builder()
+  private Long followId;
+
+  private Boolean isFollow;
+
+  public static PublicUserDto fromEntity(User user) {
+    return PublicUserDto.builder()
         .id(user.getId())
-        .email(user.getEmail())
-        .name(user.getName())
         .nickname(user.getNickname())
-        .phoneNumber(user.getPhoneNumber())
         .profileImageUrl(user.getProfileImageUrl())
         .followerCount(0L)
+        .isFollow(false)
         .build();
-  }
-
-  public void setFollowerCount(Long followerCount) {
-    this.followerCount = followerCount;
   }
 
 }
