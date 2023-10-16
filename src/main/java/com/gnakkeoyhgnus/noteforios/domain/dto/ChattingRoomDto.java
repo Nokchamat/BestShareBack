@@ -14,6 +14,10 @@ public class ChattingRoomDto {
 
   private Long id;
 
+  private Long userId;
+
+  private String userProfileImageUrl;
+
   private String userNickname;
 
   private LocalDateTime createdAt;

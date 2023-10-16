@@ -73,13 +73,17 @@ public class ChattingRoomService {
           if (Objects.equals(chattingRoom.getFirstUser().getId(), user.getId())) {
             return ChattingRoomDto.builder()
                 .id(chattingRoom.getId())
+                .userId(chattingRoom.getSecondUser().getId())
                 .userNickname(chattingRoom.getSecondUser().getNickname())
+                .userProfileImageUrl(chattingRoom.getSecondUser().getProfileImageUrl())
                 .createdAt(chattingRoom.getCreatedAt())
                 .build();
           } else {
             return ChattingRoomDto.builder()
                 .id(chattingRoom.getId())
+                .userId(chattingRoom.getFirstUser().getId())
                 .userNickname(chattingRoom.getFirstUser().getNickname())
+                .userProfileImageUrl(chattingRoom.getFirstUser().getProfileImageUrl())
                 .createdAt(chattingRoom.getCreatedAt())
                 .build();
           }
