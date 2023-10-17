@@ -3,7 +3,9 @@ package com.gnakkeoyhgnus.noteforios.service;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.gnakkeoyhgnus.noteforios.domain.entity.PageShareBoard;
+import com.gnakkeoyhgnus.noteforios.domain.entity.User;
 import java.io.IOException;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -99,7 +101,32 @@ public class AmazonS3Service {
   }
 
   public void deleteUploadFile(String key) {
+    log.info("[deleteUploadFile 시작]" + " userEmail : " + key);
+
     amazonS3Client.deleteObject(bucket, key);
+
+    log.info("[deleteUploadFile 완료]" + " key : " + key);
   }
 
+  public String uploadExplainImage(User user, MultipartFile image) {
+    try {
+      log.info("[uploadExplainImage 시작]" + " userEmail : " + user.getEmail());
+
+      objectMetadata.setContentType(image.getContentType());
+      objectMetadata.setContentLength(image.getSize());
+
+      String fileKey = "explain/" + UUID.randomUUID();
+
+      amazonS3Client.putObject(bucket, fileKey, image.getInputStream(), objectMetadata);
+
+      log.info("[uploadExplainImage 완료]" + " userEmail : " + user.getEmail());
+      return amazonS3Client.getUrl(bucket, fileKey).toString();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+      log.info(e.getMessage());
+    }
+
+    return "";
+  }
 }
