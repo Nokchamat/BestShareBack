@@ -11,8 +11,6 @@ public class SendChattingMessageForm {
 
   private Long chattingRoomId;
 
-  private Long senderId;
-
   private String message;
 
 }
