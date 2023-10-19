@@ -115,7 +115,7 @@ public class AmazonS3Service {
       objectMetadata.setContentType(image.getContentType());
       objectMetadata.setContentLength(image.getSize());
 
-      String fileKey = "explain/" + UUID.randomUUID();
+      String fileKey = "explain/" + user.getEmail() + "/" + UUID.randomUUID();
 
       amazonS3Client.putObject(bucket, fileKey, image.getInputStream(), objectMetadata);
 

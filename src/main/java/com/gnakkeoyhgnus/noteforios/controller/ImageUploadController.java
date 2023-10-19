@@ -20,9 +20,9 @@ public class ImageUploadController {
 
   @PostMapping
   public ResponseEntity<String> uploadImage(@AuthenticationPrincipal User user,
-      MultipartFile multipartFile) {
+      MultipartFile image) {
 
-    return ResponseEntity.ok(amazonS3Service.uploadExplainImage(user, multipartFile));
+    return ResponseEntity.ok(amazonS3Service.uploadExplainImage(user, image));
   }
 
   @DeleteMapping
