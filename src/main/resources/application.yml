@@ -7,9 +7,9 @@ spring:
     expiration: 3600000 # 1시간(60분) (1000 * 60 * 60L)
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 1234
-    url: jdbc:mysql://localhost:3305/note
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    url: ${DB_URL}
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
