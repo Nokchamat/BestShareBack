@@ -33,7 +33,7 @@ jobs:
       run: |
           cd ./src/main/resources
           touch ./application-prod.properties
-          echo "${{ secrets.PROPERTIES_PROD }}" > ./application-prod.properties
+          echo "${{ secrets.APPLICATION }}" > ./application-prod.properties
       shell: bash
 
     - name: Grant execute permission for gradlew
