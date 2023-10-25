@@ -32,7 +32,7 @@ jobs:
     - name: make application.yml
       run: |
           cd ./src/main/resources
-          sed -i 's|${JWT_SECRET_KEY}|${{secrets.JWT_SECRET_KEY}}|g' application.yml
+          sed -i "s/\${JWT_SECRET_KEY}/$${{secrets.JWT_SECRET_KEY}}/g" application.yml
           sed -i 's/${DB_USERNAME}/${{secrets.DB_USERNAME}}/g' application.yml
           sed -i 's/${DB_PASSWORD}/${{secrets.DB_PASSWORD}}/g' application.yml
           sed -i 's/${DB_URL}/${{secrets.DB_URL}}/g' application.yml
