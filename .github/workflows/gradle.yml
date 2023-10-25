@@ -29,10 +29,9 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     
-    - name: make application-prod.yml
+    - name: make application.yml
       run: |
-          touch ./src/main/resources/application-prod.properties
-          echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application-prod.properties
+          echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.yml
       shell: bash
 
     - name: Grant execute permission for gradlew
