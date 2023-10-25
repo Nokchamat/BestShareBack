@@ -31,16 +31,15 @@ jobs:
     
     - name: make application.yml
       run: |
-          cd ./src/main/resources
-          sed -i "s/\${JWT_SECRET_KEY}/$${{secrets.JWT_SECRET_KEY}}/g" application.yml
-          sed -i 's/${DB_USERNAME}/${{secrets.DB_USERNAME}}/g' application.yml
-          sed -i 's/${DB_PASSWORD}/${{secrets.DB_PASSWORD}}/g' application.yml
-          sed -i 's/${DB_URL}/${{secrets.DB_URL}}/g' application.yml
-          sed -i 's/${DEFAULT_IMAGE_URL}/${{secrets.DEFAULT_IMAGE_URL}}/g' application.yml
-          sed -i 's/${BUCKET_NAME}/${{secrets.BUCKET_NAME}}/g' application.yml
-          sed -i 's/${BUCKET_ACCESS_KEY}/${{secrets.BUCKET_ACCESS_KEY}}/g' application.yml
-          sed -i 's/${BUCKET_SECRET_KEY}/${{secrets.BUCKET_SECRET_KEY}}/g' application.yml
-          
+          touch ./.env
+          echo "BUCKET_ACCESS_KEY=${{ secrets.BUCKET_ACCESS_KEY }}" >> ./.env
+          echo "BUCKET_NAME=${{ secrets.BUCKET_NAME }}" >> ./.env
+          echo "BUCKET_SECRET_KEY=${{ secrets.BUCKET_SECRET_KEY }}" >> ./.env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> ./.env 
+          echo "DB_URL=${{ secrets.DB_URL }}" >> ./.env
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> ./.env
+          echo "DEFAULT_IMAGE_URL=${{ secrets.DEFAULT_IMAGE_URL }}" >> ./.env
+          echo "JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }}" >> ./.env
       shell: bash
 
     - name: Grant execute permission for gradlew
