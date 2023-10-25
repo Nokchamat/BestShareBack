@@ -40,7 +40,7 @@ jobs:
           sed -i "s/\${BUCKET_ACCESS_KEY}/${{ secrets.BUCKET_ACCESS_KEY }}/g" application.yml
           sed -i "s/\${BUCKET_NAME}/${{ secrets.BUCKET_NAME }}/g" application.yml
           sed -i "s/\${DB_PASSWORD}/${{ secrets.DB_PASSWORD }}/g" application.yml
-          sed -i "s/\${DB_URL}/${{ secrets.DB_URL }}/g" application.yml
+          sed -i "s/\${DB_USERNAME}/${{ secrets.DB_USERNAME }}/g" application.yml
 
 
           
