@@ -58,7 +58,7 @@ public class AmazonS3Service {
       objectMetadata.setContentType(thumbnail.getContentType());
       objectMetadata.setContentLength(thumbnail.getSize());
 
-      String fileKey = pageShareBoardId + "/thumbnail";
+      String fileKey = "FileAndThumbnail/" + pageShareBoardId + "/thumbnail";
 
       amazonS3Client.putObject(bucket, fileKey, thumbnail.getInputStream(), objectMetadata);
 
@@ -97,17 +97,17 @@ public class AmazonS3Service {
   }
 
   public void deleteAllFileForPageShareBoard(PageShareBoard pageShareBoard) {
-    deleteUploadFile(pageShareBoard.getThumbnailUrl().substring(PREFIX.length()));
-    deleteUploadFile(pageShareBoard.getPagePDFUrl().substring(PREFIX.length()));
+    deleteUploadFile(pageShareBoard.getThumbnailUrl());
+    deleteUploadFile(pageShareBoard.getPagePDFUrl());
   }
 
   @Transactional
-  public void deleteUploadFile(String key) {
-    log.info("[deleteUploadFile 시작]" + " key : " + key.substring(PREFIX.length()));
+  public void deleteUploadFile(String uploadedFileUrl) {
+    log.info("[deleteUploadFile 시작]" + " uploadedFileUrl : " + uploadedFileUrl);
 
-    amazonS3Client.deleteObject(bucket, key.substring(PREFIX.length()));
+    amazonS3Client.deleteObject(bucket, uploadedFileUrl.substring(PREFIX.length()));
 
-    log.info("[deleteUploadFile 완료]" + " key : " + key);
+    log.info("[deleteUploadFile 완료]" + " uploadedFileUrl : " + uploadedFileUrl);
   }
 
   @Transactional
