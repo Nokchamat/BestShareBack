@@ -44,4 +44,8 @@ public class User extends BaseTimeEntity {
   @Enumerated(EnumType.STRING)
   private RoleType role;
 
+  public void setProfileImageUrl(String profileImageUrl) {
+    this.profileImageUrl = profileImageUrl;
+  }
+
 }

@@ -1,12 +1,14 @@
 package com.gnakkeoyhgnus.noteforios.controller;
 
 import com.gnakkeoyhgnus.noteforios.domain.entity.User;
+import com.gnakkeoyhgnus.noteforios.domain.form.DeleteImageForm;
 import com.gnakkeoyhgnus.noteforios.service.AmazonS3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,9 +28,9 @@ public class ImageUploadController {
   }
 
   @DeleteMapping
-  public ResponseEntity<Void> uploadImage(String fileKey) {
+  public ResponseEntity<Void> deleteImage(@RequestBody DeleteImageForm deleteImageForm) {
 
-    amazonS3Service.deleteUploadFile(fileKey);
+    amazonS3Service.deleteUploadFile(deleteImageForm.getFileKey());
 
     return ResponseEntity.ok(null);
   }
