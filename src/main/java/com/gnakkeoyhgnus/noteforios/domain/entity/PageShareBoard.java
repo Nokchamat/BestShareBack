@@ -1,6 +1,7 @@
 package com.gnakkeoyhgnus.noteforios.domain.entity;
 
 import com.gnakkeoyhgnus.noteforios.domain.form.UpdatePageShareBoardForm;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,7 @@ public class PageShareBoard extends BaseTimeEntity {
 
   private String title;
 
+  @Column(columnDefinition = "text")
   private String explains;
 
   private String thumbnailUrl;
