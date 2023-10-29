@@ -46,19 +46,20 @@ public class UserService {
         });
 
     log.info("[signUp] 회원가입 완료 Email : " + signUpForm.getEmail());
-    userRepository.save(User.builder()
+    User user = userRepository.save(User.builder()
         .email(signUpForm.getEmail())
         .password(passwordEncoder.encode(signUpForm.getPassword()))
         .name(signUpForm.getName())
         .nickname(signUpForm.getNickname())
         .phoneNumber(signUpForm.getPhoneNumber())
-        .profileImageUrl(profileImage.isEmpty() ?
-            defaultProfileImage : amazonS3Service.uploadForProfile(profileImage, signUpForm.getEmail())
-        )
         .role(RoleType.USER)
         .emailVerified(false)
         .emailVerifiedCode(RandomString.make(5))
         .build());
+
+    user.setProfileImageUrl(profileImage.isEmpty() ?
+        defaultProfileImage : amazonS3Service.uploadForProfile(profileImage, user.getId())
+    );
   }
 
   public String signIn(SignInForm signInForm) {

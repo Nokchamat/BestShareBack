@@ -57,7 +57,7 @@ class UserServiceTest {
 
     MultipartFile multipartFile = mock(MultipartFile.class);
 
-    when(amazonS3Service.uploadForProfile(any(MultipartFile.class), any(String.class)))
+    when(amazonS3Service.uploadForProfile(any(MultipartFile.class), any(Long.class)))
         .thenReturn("uploadUrl");
 
     //when

@@ -6,6 +6,7 @@ import com.gnakkeoyhgnus.noteforios.domain.entity.PageShareBoard;
 import com.gnakkeoyhgnus.noteforios.domain.entity.User;
 import java.io.IOException;
 import java.util.UUID;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,19 +27,19 @@ public class AmazonS3Service {
 
   private final AmazonS3Client amazonS3Client;
 
-  public String uploadForProfile(MultipartFile profile, String userEmail) {
+  public String uploadForProfile(MultipartFile profile, Long userId) {
 
     try {
-      log.info("[uploadImage 시작]" + " userEmail : " + userEmail);
+      log.info("[uploadImage 시작]" + " userId : " + userId);
 
       objectMetadata.setContentType(profile.getContentType());
       objectMetadata.setContentLength(profile.getSize());
 
-      String fileKey = "profile/" + userEmail;
+      String fileKey = "profile/" + userId;
 
       amazonS3Client.putObject(bucket, fileKey, profile.getInputStream(), objectMetadata);
 
-      log.info("[uploadImage 완료]" + " userEmail : " + userEmail);
+      log.info("[uploadImage 완료]" + " userId : " + userId);
       return amazonS3Client.getUrl(bucket, fileKey).toString();
 
     } catch (IOException e) {
@@ -80,7 +81,7 @@ public class AmazonS3Service {
       objectMetadata.setContentType(pdf.getContentType());
       objectMetadata.setContentLength(pdf.getSize());
 
-      String fileKey = pageShareBoardId + "/pdf";
+      String fileKey = "FileAndThumbnail/" + pageShareBoardId + "/pdf";
 
       amazonS3Client.putObject(bucket, fileKey, pdf.getInputStream(), objectMetadata);
 
@@ -100,26 +101,28 @@ public class AmazonS3Service {
     deleteUploadFile(pageShareBoard.getPagePDFUrl().substring(PREFIX.length()));
   }
 
+  @Transactional
   public void deleteUploadFile(String key) {
-    log.info("[deleteUploadFile 시작]" + " userEmail : " + key);
+    log.info("[deleteUploadFile 시작]" + " key : " + key.substring(PREFIX.length()));
 
-    amazonS3Client.deleteObject(bucket, key);
+    amazonS3Client.deleteObject(bucket, key.substring(PREFIX.length()));
 
     log.info("[deleteUploadFile 완료]" + " key : " + key);
   }
 
+  @Transactional
   public String uploadExplainImage(User user, MultipartFile image) {
     try {
-      log.info("[uploadExplainImage 시작]" + " userEmail : " + user.getEmail());
+      log.info("[uploadExplainImage 시작]" + " userId : " + user.getId());
 
       objectMetadata.setContentType(image.getContentType());
       objectMetadata.setContentLength(image.getSize());
 
-      String fileKey = "explain/" + user.getEmail() + "/" + UUID.randomUUID();
+      String fileKey = "explain/" + user.getId() + "/" + UUID.randomUUID();
 
       amazonS3Client.putObject(bucket, fileKey, image.getInputStream(), objectMetadata);
 
-      log.info("[uploadExplainImage 완료]" + " userEmail : " + user.getEmail());
+      log.info("[uploadExplainImage 완료]" + " userId : " + user.getId());
       return amazonS3Client.getUrl(bucket, fileKey).toString();
 
     } catch (IOException e) {
