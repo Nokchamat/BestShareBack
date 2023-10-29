@@ -30,7 +30,7 @@ public class ImageUploadController {
   @DeleteMapping
   public ResponseEntity<Void> deleteImage(@RequestBody DeleteImageForm deleteImageForm) {
 
-    amazonS3Service.deleteUploadFile(deleteImageForm.getFileKey());
+    amazonS3Service.deleteUploadFile(deleteImageForm.getUploadedFileUrl());
 
     return ResponseEntity.ok(null);
   }

@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Getter
 public class DeleteImageForm {
 
-  private String fileKey;
+  private String uploadedFileUrl;
 
 }
