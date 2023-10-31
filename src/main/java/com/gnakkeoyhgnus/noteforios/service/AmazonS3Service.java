@@ -30,7 +30,7 @@ public class AmazonS3Service {
   public String uploadForProfile(MultipartFile profile, Long userId) {
 
     try {
-      log.info("[uploadImage 시작]" + " userId : " + userId);
+      log.info("[uploadForProfile 시작]" + " userId : " + userId);
 
       objectMetadata.setContentType(profile.getContentType());
       objectMetadata.setContentLength(profile.getSize());
@@ -39,7 +39,7 @@ public class AmazonS3Service {
 
       amazonS3Client.putObject(bucket, fileKey, profile.getInputStream(), objectMetadata);
 
-      log.info("[uploadImage 완료]" + " userId : " + userId);
+      log.info("[uploadForProfile 완료]" + " userId : " + userId);
       return amazonS3Client.getUrl(bucket, fileKey).toString();
 
     } catch (IOException e) {
