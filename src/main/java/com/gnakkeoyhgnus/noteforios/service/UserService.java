@@ -11,6 +11,7 @@ import com.gnakkeoyhgnus.noteforios.domain.repository.UserRepository;
 import com.gnakkeoyhgnus.noteforios.exception.CustomException;
 import com.gnakkeoyhgnus.noteforios.exception.ErrorCode;
 import com.gnakkeoyhgnus.noteforios.jwt.JwtTokenProvider;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.utility.RandomString;
@@ -99,5 +100,11 @@ public class UserService {
         });
 
     return publicUserDto;
+  }
+
+  @Transactional
+  public void updateProfileImage(User user, MultipartFile profileImage) {
+    user.setProfileImageUrl(amazonS3Service.uploadForProfile(profileImage, user.getId()));
+    userRepository.save(user);
   }
 }
