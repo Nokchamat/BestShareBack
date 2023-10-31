@@ -42,7 +42,7 @@ public class UserController {
     String token = userService.signIn(signInForm);
     HttpHeaders headers = new HttpHeaders();
     headers.add(HttpHeaders.AUTHORIZATION, token);
-
+현
     return ResponseEntity.ok().headers(headers).body(null);
   }
 
