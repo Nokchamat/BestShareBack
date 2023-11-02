@@ -1,10 +1,9 @@
-# NoteForIOS
-아이패드나 아이폰에서 사용할 수 있는 노트 \
-자신만의 아이디어로 꾸미기 가능
+# BestShare
+전자노트의 속지를 공유할 수 있는 웹 사이트
 
 ## 기술 스택
-Backend : Java, Spring Boot, JPA, Docker, Mysql \
-DevOps : AWS EC2, AWS RDS, AWS S3, Docker, Jenkins
+Backend : Java, Spring Boot, JPA, Docker, Mysql, WebSocket, STOMP \
+DevOps : AWS EC2, AWS RDS, AWS S3, Docker
 
 ## ERD
 ![img.png](img.png)
@@ -23,10 +22,14 @@ DevOps : AWS EC2, AWS RDS, AWS S3, Docker, Jenkins
 ### 게시물
     작성
     - 게시물 작성 시에 PDF로 노트의 속지 업로드 가능
+    - 회원가입 후 로그인 상태에서 게시물 작성 가능
 
     조회
-    - 조회는 회원가입 없이 조회 가능하나, 다운 시에는 회원가입 및 이메일 인증 필요
+    - 조회는 로그인 없이 조회 가능하나, PDF파일 접근 시에는 로그인 필요
     - 상세 조회 시 조회수 증가
+
+    수정
+    - 게시물 수정 시 내 프로필로 들어갔을 때 가능
 
 ### 좋아요
     - 게시물에 대해 좋아요 등록, 등록 취소, 조회
@@ -34,3 +37,7 @@ DevOps : AWS EC2, AWS RDS, AWS S3, Docker, Jenkins
 ### 팔로우
     - 사람에 대해 팔로우 가능
     - 팔로우 한 사람이 게시물 작성 시 알림에 메시지 제공
+
+### 채팅
+    - 게시물 작성자의 프로필을 확인 후 채팅
+    - 채팅룸 인원은 2명이며, 2명이 나가게 되면 채팅룸이 삭제됨, 1명만 나갔을 경우 남아 있음
