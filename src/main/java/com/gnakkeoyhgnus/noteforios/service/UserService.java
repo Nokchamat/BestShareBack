@@ -34,6 +34,7 @@ public class UserService {
   @Value("${profile.image.default}")
   private String defaultProfileImage;
 
+  @Transactional
   public void signUp(SignUpForm signUpForm, MultipartFile profileImage) {
     log.info("[signUp] 회원가입 시작 Email : " + signUpForm.getEmail());
 
