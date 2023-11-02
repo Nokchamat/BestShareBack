@@ -1,7 +1,6 @@
 package com.gnakkeoyhgnus.noteforios.domain.dto;
 
-import com.gnakkeoyhgnus.noteforios.domain.entity.Likes;
-import java.time.LocalDateTime;
+import com.gnakkeoyhgnus.noteforios.domain.entity.PageShareBoard;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,17 +16,26 @@ public class LikesDto {
 
   private Long pageShareBoardId;
 
-  private String pageShareBoardTitle;
+  private String title;
 
-  private LocalDateTime createdAt;
+  private String thumbnailUrl;
 
-  public static LikesDto fromEntity(Likes likes) {
+  private Long viewCount;
+
+  private Long likesCount;
+
+  public static LikesDto fromEntity(PageShareBoard pageShareBoard, Long likesId) {
     return LikesDto.builder()
-        .id(likes.getId())
-        .pageShareBoardId(likes.getPageShareBoard().getId())
-        .pageShareBoardTitle(likes.getPageShareBoard().getTitle())
-        .createdAt(likes.getCreatedAt())
+        .id(likesId)
+        .pageShareBoardId(pageShareBoard.getId())
+        .title(pageShareBoard.getTitle())
+        .thumbnailUrl(pageShareBoard.getThumbnailUrl())
+        .viewCount(pageShareBoard.getViewCount())
         .build();
+  }
+
+  public void setLikesCount(Long likesCount) {
+    this.likesCount = likesCount;
   }
 
 }

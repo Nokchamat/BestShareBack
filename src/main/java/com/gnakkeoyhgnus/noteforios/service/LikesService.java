@@ -42,7 +42,14 @@ public class LikesService {
 
   public Page<LikesDto> getMyLikes(User user, Pageable pageable) {
     return likesRepository.findByUserId(user.getId(), pageable)
-        .map(LikesDto::fromEntity);
+        .map(likes -> {
+          LikesDto likesDto = LikesDto.fromEntity(likes.getPageShareBoard(), likes.getId());
+
+          likesDto.setLikesCount(
+              likesRepository.countByPageShareBoardId(likes.getPageShareBoard().getId()));
+
+          return likesDto;
+        });
   }
 
   @Transactional
