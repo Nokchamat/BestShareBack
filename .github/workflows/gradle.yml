@@ -45,6 +45,8 @@ jobs:
           sed -i "s/\${DB_URL}/${{ secrets.DB_URL }}/g" application.yml
           sed -i "s/\${DEFAULT_IMAGE_URL}/${{ secrets.DEFAULT_IMAGE_URL }}/g" application.yml
           sed -i "s/\${BUCKET_SECRET_KEY}/${{ secrets.BUCKET_SECRET_KEY }}/g" application.yml
+          sed -i "s/\${MAIL_ID}/${{ secrets.MAIL_ID }}/g" application.yml
+          sed -i "s/\${MAIL_PASSWORD}/${{ secrets.MAIL_PASSWORD }}/g" application.yml
           
       shell: bash
 
