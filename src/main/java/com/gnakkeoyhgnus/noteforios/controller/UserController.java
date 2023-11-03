@@ -67,4 +67,20 @@ public class UserController {
 
     return ResponseEntity.ok(null);
   }
+
+  @PostMapping("/verify/{code}")
+  public ResponseEntity<String> verifyEmail(@AuthenticationPrincipal User user,
+      @PathVariable String code) {
+
+    userService.verifyEmailCode(user, code);
+
+    return ResponseEntity.ok("회원가입 인증이 완료됐습니다.");
+  }
+
+  @GetMapping("/verify")
+  public ResponseEntity<Boolean> verifyEmail(@AuthenticationPrincipal User user){
+
+    return ResponseEntity.ok(user.getEmailVerified());
+  }
+
 }
