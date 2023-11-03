@@ -48,4 +48,8 @@ public class User extends BaseTimeEntity {
     this.profileImageUrl = profileImageUrl;
   }
 
+  public void setEmailVerified() {
+    this.emailVerified = true;
+  }
+
 }

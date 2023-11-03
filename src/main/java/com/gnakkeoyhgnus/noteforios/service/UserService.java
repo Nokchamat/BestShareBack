@@ -1,5 +1,8 @@
 package com.gnakkeoyhgnus.noteforios.service;
 
+import static com.gnakkeoyhgnus.noteforios.exception.ErrorCode.ALREADY_VERIFY_EMAIL;
+import static com.gnakkeoyhgnus.noteforios.exception.ErrorCode.MISMATCH_VERIFY_CODE;
+
 import com.gnakkeoyhgnus.noteforios.domain.constants.RoleType;
 import com.gnakkeoyhgnus.noteforios.domain.dto.PublicUserDto;
 import com.gnakkeoyhgnus.noteforios.domain.dto.UserDto;
@@ -30,6 +33,7 @@ public class UserService {
   private final AmazonS3Service amazonS3Service;
   private final JwtTokenProvider jwtTokenProvider;
   private final FollowRepository followRepository;
+  private final SendEmailService sendEmailService;
 
   @Value("${profile.image.default}")
   private String defaultProfileImage;
@@ -62,6 +66,8 @@ public class UserService {
     user.setProfileImageUrl(profileImage.isEmpty() ?
         defaultProfileImage : amazonS3Service.uploadForProfile(profileImage, user.getId())
     );
+
+    sendEmailService.sendMail(user.getEmail(), user.getEmailVerifiedCode());
   }
 
   public String signIn(SignInForm signInForm) {
@@ -106,6 +112,21 @@ public class UserService {
   @Transactional
   public void updateProfileImage(User user, MultipartFile profileImage) {
     user.setProfileImageUrl(amazonS3Service.uploadForProfile(profileImage, user.getId()));
+    userRepository.save(user);
+  }
+
+  @Transactional
+  public void verifyEmailCode(User user, String code) {
+    if (user.getEmailVerified()) {
+      throw new CustomException(ALREADY_VERIFY_EMAIL);
+    }
+
+    if (!user.getEmailVerifiedCode().equals(code)) {
+      throw new CustomException(MISMATCH_VERIFY_CODE);
+    }
+
+    user.setEmailVerified();
+
     userRepository.save(user);
   }
 }

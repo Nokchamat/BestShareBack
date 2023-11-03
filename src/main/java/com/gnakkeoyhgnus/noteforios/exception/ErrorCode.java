@@ -39,7 +39,12 @@ public enum ErrorCode {
   NOT_FOUND_FOLLOW(HttpStatus.BAD_REQUEST, "팔로우를 찾을 수 없습니다."),
 
   ALREADY_EXIST_CHATTINGROOM(HttpStatus.BAD_REQUEST, "이미 상대방과의 채팅방이 존재합니다."),
-  NOT_FOUND_CHATTINGROOM(HttpStatus.BAD_REQUEST, "채팅방을 찾을 수 없습니다.")
+  NOT_FOUND_CHATTINGROOM(HttpStatus.BAD_REQUEST, "채팅방을 찾을 수 없습니다."),
+
+  //이메일 인증
+  ALREADY_VERIFY_EMAIL(HttpStatus.BAD_REQUEST, "이미 인증된 이메일 입니다."),
+  MISMATCH_VERIFY_CODE(HttpStatus.BAD_REQUEST, "인증코드가 일치하지 않습니다."),
+  PLEASE_VERIFY_EMAIL(HttpStatus.BAD_REQUEST, "이메일 인증을 필요합니다."),
   ;
 
   // 회원가입 Valid
