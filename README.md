@@ -12,7 +12,7 @@ DevOps : AWS EC2, AWS RDS, AWS S3, Docker
 ### 회원가입 / 로그인
     회원가입
     - 중복된 이메일로 회원가입 불가
-    - 게시물 작성하기 위해서는 이메일 인증 필요. Mailgun api 사용 예정
+    - 게시물 작성하기 위해서는 이메일 인증 필요. GoogleMailApi 사용
     - data input 값은 validation을 사용하여 체크
     
     로그인
